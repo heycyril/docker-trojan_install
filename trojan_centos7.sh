@@ -25,8 +25,8 @@ install_docker(){
 install_acme(){
 
     curl https://get.acme.sh | sh
-    ~/.acme.sh/acme.sh  --issue  -d $domain  --standalone
-    ~/.acme.sh/acme.sh  --installcert  -d  $domain   \
+    ~/.acme.sh/acme.sh  --issue  -d $1  --standalone
+    ~/.acme.sh/acme.sh  --installcert  -d  $1   \
         --key-file   /usr/src/trojan/private.key \
         --fullchain-file /usr/src/trojan/fullchain.cer
 
@@ -58,7 +58,7 @@ mkdir /usr/src/trojan/web
 cd /usr/src/trojan
 read -p "输入你的VPS绑定的域名：" domain
 
-install_acme
+install_acme $domain
 
 cat > /usr/src/trojan/server.conf <<-EOF
 {
